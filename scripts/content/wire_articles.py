@@ -76,7 +76,7 @@ DENY = [
     'allen iverson', 'air india', 'ai-ais', 'said ai',  # extend as you see noise
 ]
 
-MODEL = 'deepseek-v4-flash'   # AI model used for writing
+MODEL = 'Qwen3.8-Flash-Next'   # AI model used for writing
 PROVIDER = 'localAIServer'                # provider
 USE_Z = False       # True -> use `hermes -z` (purest stdout) instead of `chat -q`
 
@@ -374,7 +374,7 @@ def main():
     ap.add_argument('--max', type=int, default=MAX_ITEMS)
     ap.add_argument('--out', default=OUTPUT_PATH)
     ap.add_argument('--model', default=None,
-                    help='Override model (default: deepseek-v4-flash)')
+                    help='Override model (default: Qwen3.8-Flash-Next)')
     ap.add_argument('--provider', default=None,
                     help='Override provider (default: localAIServer)')
     args = ap.parse_args()

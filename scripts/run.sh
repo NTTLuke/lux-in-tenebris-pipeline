@@ -80,7 +80,7 @@ PIPELINE_PROVIDER="localAIServer"
 # Model for every LLM step (scouts, editor, image-gen, podcast-pill, wire
 # articles) — was hardcoded separately in each of the 7 call sites below;
 # centralized here so it's a one-line change instead of a find-and-replace.
-PIPELINE_MODEL="deepseek-v4-flash"
+PIPELINE_MODEL="Qwen3.8-Flash-Next"
 
 # ── Setup ────────────────────────────────────────────────────
 mkdir -p "$LOG_DIR" "$SCOUTS_DIR" "$IMAGES_DIR" "$OUTPUT_DIR"
