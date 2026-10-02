@@ -694,7 +694,7 @@ if [ -f "$OUTPUT_DIR/making-of.html" ]; then
 fi
 cp -r "$OUTPUT_DIR/fonts"/* "$DEPLOY_DIR/fonts/" 2>/dev/null || true
 mkdir -p "$DEPLOY_DIR/images"
-cp "$IMAGES_DIR"/*.jpg "$DEPLOY_DIR/images/" 2>/dev/null || true
+cp "$IMAGES_DIR"/*.jpg "$IMAGES_DIR"/*.png "$DEPLOY_DIR/images/" 2>/dev/null || true
 mkdir -p "$DEPLOY_DIR/podcasts"
 cp /tmp/v2/podcasts/*.ogg "$DEPLOY_DIR/podcasts/" 2>/dev/null || true
 echo "  ✓ files copied to deploy dir"
@@ -738,7 +738,7 @@ git push origin main --quiet 2>/dev/null || echo "  ⚠ git push failed — will
 echo "  ✓ pushed to GitHub"
 
 # ── Report ──────────────────────────────────────────────────
-IMG_COUNT=$(find "$IMAGES_DIR" -name '*.jpg' 2>/dev/null | wc -l)
+IMG_COUNT=$(find "$IMAGES_DIR" \( -name '*.jpg' -o -name '*.png' \) 2>/dev/null | wc -l)
 echo ""
 echo "═══════════════════════════════════════════════"
 echo "✅ V2 PIPELINE COMPLETE — $(date '+%H:%M:%S')"
