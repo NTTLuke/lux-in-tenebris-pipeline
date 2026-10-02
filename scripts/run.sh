@@ -708,6 +708,26 @@ fi
 cp "$V2_DIR/edition.json" "$DEPLOY_DIR/edition.json"
 echo "  ✓ edition.json saved to deploy dir"
 
+# ── Step 10b: Edition-100 celebration gate ──────────────────────
+# ONE-OFF for issue #100: injects the fullscreen LVX Fragments game gate
+# (with skip button) into index.html, and copies the game + image assets
+# beside it. The injector is a NO-OP for any other issue, so from #101 the
+# newspaper renders exactly as normal — nothing here persists.
+# Non-fatal: if it fails the paper still publishes without the gate.
+echo "[step 10b] edition-100 gate..."
+LUX100_GATE="$SCRIPT_DIR/inject/inject_lux100_gate.py"
+LUX100_ASSETS="$PIPELINE_ROOT/assets/lux100"
+if [ -f "$LUX100_GATE" ] && [ -d "$LUX100_ASSETS" ]; then
+    python3 "$LUX100_GATE" "$DEPLOY_DIR/index.html" "$NEXT_ISSUE" \
+        --game "$LUX100_ASSETS/lux-fragments-100.html" \
+        --image "$LUX100_ASSETS/lux100.png" \
+        --output "$DEPLOY_DIR/index.html" \
+        2>>"$LOGFILE" && echo "  ✓ lux-100 gate step ran" || echo "  ⚠ lux-100 gate step failed (non-fatal)"
+else
+    echo "  - inject_lux100_gate.py or assets not found, skipping"
+fi
+check_timeout
+
 # ── Step 11: Headlines history + commit + push ───────────────
 # (archiving the PREVIOUS issue already happened in step 1b, before this
 # run's files were copied in — see the comment there for why)
